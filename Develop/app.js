@@ -11,6 +11,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
+const teamArray = [];
+
 // Manager Questions / Function
 
 const managerQuestions = () =>
@@ -40,36 +42,19 @@ const managerQuestions = () =>
 managerQuestions().then((response) => {
   if (response.addEmployee === true) {
     console.log("yes employee");
-    typeEmployee();
+    employeeQuestions();
   }
 });
 
-function typeEmployee() {
+// CREATE new Manager with manager.question data
+// const manager = new Manager(manager.);
+// teamArray.push(manager);
+
+function employeeQuestions() {
   console.log("type function triggered");
 }
 
-// then employee type
-// Main questions function
-
-// PSUEDO
-
-// Manager Questions - Inquireere
-// Intern Questions
-// Employee Questions - prompts
-// Add another Employee - prompts
-
-// Answers
-// New (constructor)
-
-// EMPLOYEE QUESTIONS
 // RENDER & WRITE
-
-// const engineer = new Engineer("Sam", 45, "me@meial.com", "speloqu24");
-
-// const array = [];
-// array.push(engineer);
-
-// // if no, render & Write
 
 // const renString = render(array);
 // fs.writeFile(outputPath, renString, (err) => {
@@ -79,6 +64,16 @@ function typeEmployee() {
 
 // console.log(renString);
 // console.log(engineer);
+
+// then employee type
+// Main questions function
+
+// Intern Questions
+// Employee Questions - prompts
+// Add another Employee - prompts
+
+// Answers
+// New (constructor)
 
 // office number/ school / add employee
 
