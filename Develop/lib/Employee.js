@@ -23,11 +23,6 @@ class Employee {
     return "Employee";
   }
 }
-
-//  if engineer is selected append to engineer.html
-// if intern is selected append to intern.html
-// if manager is selected append to manager.html
-
 // fs.writeFile("htmlRenderer.js", htmlInfo, (err) =>
 //   err ? console.error(err) : console.log("reading employee file")
 // );

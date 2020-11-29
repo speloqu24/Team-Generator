@@ -10,10 +10,14 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
+// const { getMaxListeners } = require("process");
 
 const teamArray = [];
+const managerArray = [];
 
+// ---------------------------------------------------
 // Manager Questions / Function
+// ---------------------------------------------------
 
 const managerQuestions = () =>
   inquirer.prompt([
@@ -41,22 +45,69 @@ const managerQuestions = () =>
 
 managerQuestions().then((response) => {
   if (response.addEmployee === true) {
-    console.log("yes employee");
-    employeeQuestions();
+    inquirer.prompt([
+      {
+        type: "list",
+        name: "role",
+        message: "What the role of this new employee? ",
+        choices: ["Engineer", "Intern", "Manager"],
+      },
+    ]);
+
+    const manager = new Manager(this.name);
+    managerArray.push(manager);
+
+    const engineer = new Engineer("sam", 12345, "me@me.com", "speloqu24");
+    teamArray.push(engineer);
+
+    const renString = render(teamArray, managerArray);
+    fs.writeFile(outputPath, renString, (err) => {
+      if (err) throw err;
+      // console.log("success");
+    });
+
+    // console.log(renString);
+    // console.log(engineer);
   }
 });
 
-// CREATE new Manager with manager.question data
-// const manager = new Manager(manager.);
-// teamArray.push(manager);
+// ---------------------------------------------------
+// New Employee/MemberQuestions
+// ---------------------------------------------------
 
-function employeeQuestions() {
-  console.log("type function triggered");
-}
+// const newMemberQuestions = () =>
+//   inquirer.prompt([
+//     {
+//       type: "name",
+//       name: "name",
+//       message: "What is the new employee's name?",
+//     },
+//     {
+//       type: "name",
+//       name: "id",
+//       message: "Enter employee ID number: ",
+//     },
+//     {
+//       type: "name",
+//       name: "email",
+//       message: "Enter employee email: ",
+//     },
+//     {
+//       type: "list",
+//       name: "role",
+//       message: "What the role of this new employee? ",
+//       choices: ["Engineer", "Intern"],
+//     },
+//   ]);
 
 // RENDER & WRITE
 
-// const renString = render(array);
+// const engineer = new Engineer("sam", 12345, "me@me.com");
+// teamArray.push(engineer);
+
+// const teamArray = [];
+
+// const renString = render(teamArray);
 // fs.writeFile(outputPath, renString, (err) => {
 //   if (err) throw err;
 //   console.log("success");
