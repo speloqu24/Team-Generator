@@ -13,8 +13,8 @@ const Employee = require("./lib/Employee");
 
 // Manager Questions / Function
 
-const managerQuestions = inquirer
-  .prompt([
+const managerQuestions = () =>
+  inquirer.prompt([
     {
       type: "name",
       name: "officeNumber",
@@ -31,22 +31,25 @@ const managerQuestions = inquirer
       message: "What is your ID",
     },
     {
-      type: "name",
+      type: "confirm",
       name: "addEmployee",
       message: "Would you like to add an Employee?",
     },
-  ])
-  .then((data) => {});
+  ]);
 
-// Main questions function
-function init() {
-  inquirer.prompt(managerQuestions);
+managerQuestions().then((response) => {
+  if (response.addEmployee === true) {
+    console.log("yes employee");
+    typeEmployee();
+  }
+});
 
-  // if (addEmployee) console.log("addemployee worked");
-
-  // if Manager says" Yes I'd like to add another employee, prompt with type of employee (engineer or intern)
+function typeEmployee() {
+  console.log("type function triggered");
 }
-init();
+
+// then employee type
+// Main questions function
 
 // PSUEDO
 
@@ -59,10 +62,9 @@ init();
 // New (constructor)
 
 // EMPLOYEE QUESTIONS
-
-// const engineer = new Engineer("Hannah", 7, "me@meial.com", "speloqu24");
-
 // RENDER & WRITE
+
+// const engineer = new Engineer("Sam", 45, "me@meial.com", "speloqu24");
 
 // const array = [];
 // array.push(engineer);
