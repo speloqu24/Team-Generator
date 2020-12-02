@@ -19,20 +19,31 @@ const managerArray = [];
 // Manager Questions / Function
 // ---------------------------------------------------
 
-const managerQuestions = () =>
+const reAsk = () => {
   inquirer.prompt([
     {
-      type: "name",
+      type: "list",
+      name: "role",
+      message: "What type of employee would you like to add",
+      choices: ["Engineer", "Intern", "None"],
+    },
+  ]);
+};
+
+const createManager = () =>
+  inquirer.prompt([
+    {
+      type: "input",
       name: "officeNumber",
       message: "What is your office number?",
     },
     {
-      type: "name",
+      type: "input",
       name: "name",
       message: "What is your name?",
     },
     {
-      type: "name",
+      type: "input",
       name: "id",
       message: "What is your ID",
     },
@@ -43,33 +54,51 @@ const managerQuestions = () =>
     },
   ]);
 
-managerQuestions().then((response) => {
-  if (response.addEmployee === true) {
-    inquirer.prompt([
-      {
-        type: "list",
-        name: "role",
-        message: "What the role of this new employee? ",
-        choices: ["Engineer", "Intern", "Manager"],
-      },
-    ]);
+// managerQuestions().then((response) => {
+// if Y then add
 
-    const manager = new Manager(this.name);
-    managerArray.push(manager);
+createManager().then((response) => {
+  if (response.id === true) {
+    reAsk();
+    // inquirer.prompt([
+    //   {
+    //     type: "list",
+    //     name: "role",
+    //     message: "What type of employee would you like to add",
+    //     choices: ["Engineer", "Intern", "None"],
+    //   },
 
-    const engineer = new Engineer("sam", 12345, "me@me.com", "speloqu24");
-    teamArray.push(engineer);
+    // const manager = new Manager(this.name);
+    // managerArray.push(manager);
 
-    const renString = render(teamArray, managerArray);
-    fs.writeFile(outputPath, renString, (err) => {
-      if (err) throw err;
-      // console.log("success");
-    });
+    // const engineer = new Engineer("sam", 12345, "me@me.com", "speloqu24");
+    // // response.name
+    // teamArray.push(engineer);
+
+    // const renString = render(teamArray, managerArray);
+    // fs.writeFile(outputPath, renString, (err) => {
+    //   if (err) throw err;
+    //   // console.log("success");
+    // });
 
     // console.log(renString);
     // console.log(engineer);
   }
 });
+
+// create manager, intern, engineer functions
+// call re-ask function at the end
+// if they select none> Render
+
+// The Re-ask - Function
+// {
+//         type: "list",
+//         name: "role",
+//         message: "What type of employee would you like to add",
+//         choices: ["Engineer", "Intern", "None"],
+//       },
+
+// Render/Restring function
 
 // ---------------------------------------------------
 // New Employee/MemberQuestions
