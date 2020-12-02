@@ -1,17 +1,17 @@
 # Team-Generator
 
-// then employee type
+// const manager = new Manager(this.name);
+// managerArray.push(manager);
 
-// Main questions function
-// function init() {
-// inquirer.prompt(managerQuestions);
-// }
+// const engineer = new Engineer("sam", 12345, "me@me.com", "speloqu24");
+// // response.name
+// teamArray.push(engineer);
 
-// init();
+// const renString = render(teamArray, managerArray);
+// fs.writeFile(outputPath, renString, (err) => {
+// if (err) throw err;
+// // console.log("success");
+// });
 
-.then((managerQuestions) => {
-if (managerQuestions.addEmployee === true) {
-console.log("yes employee");
-typeEmployee();
-}
-});
+// console.log(renString);
+// console.log(engineer);

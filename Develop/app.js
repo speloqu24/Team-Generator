@@ -10,16 +10,47 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
-// const { getMaxListeners } = require("process");
 
-const teamArray = [];
-const managerArray = [];
+// const teamArray = [];
+// const managerArray = [];
 
 // ---------------------------------------------------
-// Manager Questions / Function
+// Initial Manager Questions, creating the Manager
 // ---------------------------------------------------
 
-const reAsk = () => {
+const createManager = () =>
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "officeNumber",
+      message: "What is your managers office number? ",
+    },
+    {
+      type: "input",
+      name: "name",
+      message: "What is your managers name? ",
+    },
+    {
+      type: "input",
+      name: "id",
+      message: "What is your managers ID? ",
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "What is your managers email? ",
+    },
+  ]);
+
+createManager().then(() => {
+  addTeamMember();
+});
+
+// ---------------------------------------------------
+// Adding Team members
+// ---------------------------------------------------
+
+const addTeamMember = () => {
   inquirer.prompt([
     {
       type: "list",
@@ -30,59 +61,9 @@ const reAsk = () => {
   ]);
 };
 
-const createManager = () =>
-  inquirer.prompt([
-    {
-      type: "input",
-      name: "officeNumber",
-      message: "What is your office number?",
-    },
-    {
-      type: "input",
-      name: "name",
-      message: "What is your name?",
-    },
-    {
-      type: "input",
-      name: "id",
-      message: "What is your ID",
-    },
-    {
-      type: "confirm",
-      name: "addEmployee",
-      message: "Would you like to add an Employee?",
-    },
-  ]);
-
-// managerQuestions().then((response) => {
-// if Y then add
-
-createManager().then((response) => {
-  if (response.id === true) {
-    reAsk();
-    // inquirer.prompt([
-    //   {
-    //     type: "list",
-    //     name: "role",
-    //     message: "What type of employee would you like to add",
-    //     choices: ["Engineer", "Intern", "None"],
-    //   },
-
-    // const manager = new Manager(this.name);
-    // managerArray.push(manager);
-
-    // const engineer = new Engineer("sam", 12345, "me@me.com", "speloqu24");
-    // // response.name
-    // teamArray.push(engineer);
-
-    // const renString = render(teamArray, managerArray);
-    // fs.writeFile(outputPath, renString, (err) => {
-    //   if (err) throw err;
-    //   // console.log("success");
-    // });
-
-    // console.log(renString);
-    // console.log(engineer);
+addTeamMember().then(() => {
+  if (response.role === "Intern") {
+    createIntern();
   }
 });
 
@@ -90,44 +71,36 @@ createManager().then((response) => {
 // call re-ask function at the end
 // if they select none> Render
 
-// The Re-ask - Function
-// {
-//         type: "list",
-//         name: "role",
-//         message: "What type of employee would you like to add",
-//         choices: ["Engineer", "Intern", "None"],
-//       },
+// ---------------------------------------------------
+// Adding Intern
+// ---------------------------------------------------
+
+const createIntern = () => {
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "What is the interns name? ",
+    },
+    {
+      type: "input",
+      name: "id",
+      message: "What is the interns ID? ",
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "What is the interns email? ",
+    },
+    {
+      type: "input",
+      name: "school",
+      message: "What school did the intern go to? ",
+    },
+  ]);
+};
 
 // Render/Restring function
-
-// ---------------------------------------------------
-// New Employee/MemberQuestions
-// ---------------------------------------------------
-
-// const newMemberQuestions = () =>
-//   inquirer.prompt([
-//     {
-//       type: "name",
-//       name: "name",
-//       message: "What is the new employee's name?",
-//     },
-//     {
-//       type: "name",
-//       name: "id",
-//       message: "Enter employee ID number: ",
-//     },
-//     {
-//       type: "name",
-//       name: "email",
-//       message: "Enter employee email: ",
-//     },
-//     {
-//       type: "list",
-//       name: "role",
-//       message: "What the role of this new employee? ",
-//       choices: ["Engineer", "Intern"],
-//     },
-//   ]);
 
 // RENDER & WRITE
 
@@ -144,18 +117,6 @@ createManager().then((response) => {
 
 // console.log(renString);
 // console.log(engineer);
-
-// then employee type
-// Main questions function
-
-// Intern Questions
-// Employee Questions - prompts
-// Add another Employee - prompts
-
-// Answers
-// New (constructor)
-
-// office number/ school / add employee
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
