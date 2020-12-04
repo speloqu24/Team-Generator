@@ -9,7 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const Employee = require("./lib/Employee");
+// const Employee = require("./lib/Employee");
 
 const teamArray = [];
 // ---------------------------------------------------
@@ -42,7 +42,13 @@ const createManager = () => {
     ])
     .then((response) => {
       console.log(response);
-      // create a manager here and push them into employees array
+      const manager = new Manager(
+        response.name,
+        response.id,
+        response.email,
+        response.officeNumber
+      );
+      teamArray.push(manager);
       addAnother();
     });
 };
@@ -57,13 +63,13 @@ const addAnother = () => {
       },
     ])
     .then((response) => {
-      if (response) {
+      if (response.addAnother === true) {
         addTeamMember();
       } else {
         const renString = render(teamArray);
         fs.writeFile(outputPath, renString, (err) => {
           if (err) throw err;
-          console.log("success");
+          console.log("Your Team is being built!");
         });
       }
     });
@@ -87,16 +93,10 @@ const addTeamMember = () => {
       if (response.role === "Intern") {
         createIntern();
       } else if (response.role === "Engineer") {
-        // create Engineer
-      } else {
-        // build team and write html
+        createEngineer();
       }
     });
 };
-
-// create manager, intern, engineer functions
-// call re-ask function at the end
-// if they select none> Render
 
 // ---------------------------------------------------
 // Adding Intern
@@ -139,20 +139,50 @@ const createIntern = () => {
     });
 };
 
+// ---------------------------------------------------
+// Adding Engineer
+// ---------------------------------------------------
+
+const createEngineer = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is the Engineer's name? ",
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "What is the Engineer's ID? ",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the Engineer's email? ",
+      },
+      {
+        type: "input",
+        name: "github",
+        message: "What is the Engineer's github? ",
+      },
+    ])
+    .then((response) => {
+      console.log(response);
+      const engineer = new Engineer(
+        response.name,
+        response.id,
+        response.email,
+        response.github
+      );
+      teamArray.push(engineer);
+      addAnother();
+    });
+};
+
 createManager();
 
-// Render/Restring function
-
-// RENDER & WRITE
-
 // // const teamArray = [];
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
