@@ -1,6 +1,6 @@
-# ![License](https://img.shields.io/badge/license-NONE-green.svg) Title: Team Generator
+# Title: Team Generator
 
-Samantha Peloquin
+Created By: Samantha Peloquin
 
 > Deployed Application:
 
@@ -37,4 +37,8 @@ Samantha Peloquin
 
 > _If you have any questions at all please don't hesitate to review the repo or email me directly_
 >
-> [![Generic badge](https://img.shields.io/badge/Github-dodgerblue.svg)](https://github.com/speloqu24) > [![Generic badge](https://img.shields.io/badge/Email-dodgerblue.svg)](mailto:speloqu24@gmail.com)
+> [![Generic badge](https://img.shields.io/badge/Github-dodgerblue.svg)](https://github.com/speloqu24) [![Generic badge](https://img.shields.io/badge/Email-dodgerblue.svg)](mailto:speloqu24@gmail.com)
+
+## ScreenShots
+
+<img src="Assets/Roster_Built.png" width="500">

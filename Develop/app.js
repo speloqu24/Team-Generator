@@ -42,7 +42,7 @@ const createManager = () => {
       },
     ])
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       const manager = new Manager(
         response.name,
         response.id,
@@ -74,7 +74,7 @@ const addAnother = () => {
         const renString = render(teamArray);
         fs.writeFile(outputPath, renString, (err) => {
           if (err) throw err;
-          console.log("Your Team is being built!");
+          console.log("Your Team has been built!");
         });
       }
     });
@@ -132,7 +132,7 @@ const createIntern = () => {
       },
     ])
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       const intern = new Intern(
         response.name,
         response.id,
@@ -173,7 +173,7 @@ const createEngineer = () => {
       },
     ])
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       const engineer = new Engineer(
         response.name,
         response.id,
